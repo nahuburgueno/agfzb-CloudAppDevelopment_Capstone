@@ -10,6 +10,15 @@ from datetime import datetime
 import logging
 import json
 
+
+#Render
+
+def static_page(request):
+    return render(request, 'static_page.html')
+
+
+
+
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
 
@@ -20,10 +29,13 @@ logger = logging.getLogger(__name__)
 # Create an `about` view to render a static about page
 # def about(request):
 # ...
-
+def about(request):
+    return render(request, 'djangoapp/about.html')
 
 # Create a `contact` view to return a static contact page
 #def contact(request):
+def contact(request):
+    return render(request, 'djangoapp/contact.html')
 
 # Create a `login_request` view to handle sign in request
 # def login_request(request):
