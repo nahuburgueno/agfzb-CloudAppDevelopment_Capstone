@@ -5,7 +5,78 @@
     {% load static %}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
+<nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+    <a class="navbar-brand" href="/djangoapp">Best Cars</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+           {% if user.is_authenticated %} 
+        <li class="nav-item active">
+          <a class="nav-link" href="/djangoapp">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/djangoapp/about">About me</a>
+        </li>
+        <li class="nav-item"> 
+            <a class="nav-link" href="/djangoapp/contact">Contact Us</a>
+          </li>
+          <li>
+                <a class="btn btn-link" href="#">{{ user.first_name }}({{ user.username }})</a>
+                <a class="btn btn-link btn-light m-2" href="">Logout</a> 
+
+            </li>
+             {% else %} 
+             <li>
+        <form class="form-inline my-2 my-lg-0" method="post" action="/login/">
+                      {% csrf_token %}
+        <input class="form-control mr-sm-2" type="text" placeholder="Username" aria-label="Search">
+        <input class="form-control mr-sm-2" type="password" placeholder="Password" aria-label="Search">
+        <button class="btn btn-primary m-2">Login</button>
+        <button class="btn btn-light m-2">Sign Up</button>
+      </form>
+      </li>
+{% endif %} 
+      </ul>
+      
+    </div>
+  </nav> 
     <body>
-    <!--Add a registration form here -->
+
+        
+
+        <form class="m-3" action="/djangoapp/registration/" method="POST">
+
+            {% csrf_token %}
+
+            <h1>Sign Up</h1>
+
+        <div class="form-group">
+            <label for="username">User Name:</label>
+            <input type="text" class="form-control" placeholder="Enter User Name" id="username" name="username" required>
+        </div>
+
+      <div class="form-group">
+        <label for="first_name">First Name:</label>
+        <input type="text" class="form-control" placeholder="Enter First Name" id="first_name" name="first_name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="last_name">Last Name:</label>
+        <input type="text" class="form-control" placeholder="Enter Last Name" id="last_name" name="last_name" required>
+      </div>
+
+      
+
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" placeholder="Enter Passsword" class="form-control" id="password" name="password" required>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Sign Up</button>
+    </form>
+          
     </body>
 </html>

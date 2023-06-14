@@ -12,7 +12,7 @@
     <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
 
 </head>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+ <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
     <a class="navbar-brand" href="/djangoapp">Best Cars</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -20,6 +20,7 @@
   
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
+           {% if user.is_authenticated %} 
         <li class="nav-item active">
           <a class="nav-link" href="/djangoapp">Home <span class="sr-only">(current)</span></a>
         </li>
@@ -29,9 +30,28 @@
         <li class="nav-item"> 
             <a class="nav-link" href="/djangoapp/contact">Contact Us</a>
           </li>
+          <li>
+
+                <a class="btn btn-link" href="#">{{ user.first_name }}({{ user.username }})</a>
+                <a class="btn btn-link btn-light m-2" href="/djangoapp/logout">Logout</a> 
+          
+            </li>
+             {% else %} 
+             <li>
+        <form class="form-inline my-2 my-lg-0" method="post" action="/djangoapp/login/">
+                      {% csrf_token %}
+        <input class="form-control mr-sm-2" type="text" placeholder="Username" aria-label="Search" name='username'>
+        <input class="form-control mr-sm-2" type="password" placeholder="Password" aria-label="Search" name='password'>
+        <button class="btn btn-primary m-2">Login</button>
+        <a href="/djangoapp/registration" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Sign Up</a>
+      </form>
+      </li>
+        {% endif %} 
       </ul>
+      
     </div>
-  </nav>
+  </nav> 
+
     
     <body>
     <!-- Remove this line the first time you edit this file -->
